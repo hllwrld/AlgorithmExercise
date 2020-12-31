@@ -11,5 +11,5 @@ class MainActivity : AppCompatActivity() {
 }
 
 fun main() {
-    ColorSort.test()
+    SubSortLcci.test()
 }
