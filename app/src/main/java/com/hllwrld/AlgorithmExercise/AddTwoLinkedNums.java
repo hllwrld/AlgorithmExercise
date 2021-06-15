@@ -43,38 +43,67 @@ public class AddTwoLinkedNums {
         Node pre = null;
         while(cur != null) {
            Node nextNode = cur.next;
-           pre = cur;
            cur.next = pre;
+           pre = cur;
            cur = nextNode;
         }
         return pre;
     }
 
-/*
-    private static void combineTowList(Node list1, Node list2) {
-        list1 = reverseList(list1);
-        list2 = reverseList(list2);
+    private static Node combineTowList(Node list1, Node list2) {
+        Node head1 = reverseList(list1);
+        printList(head1);
+        Node head2= reverseList(list2);
+        printList(head2);
         int temp = 0;
-        Node ptr1 = list1;
-        Node ptr2 = list2;
-        while (ptr1.next!= null && ptr2.next!= null) {
-            int sum  =temp + ptr1.mValue + ptr2.mValue >=10;
+        Node ptr1 = head1;
+        Node ptr2 = head2;
+        Node pre = ptr1;
+        while (ptr1 != null && ptr2 != null) {
+            int sum  =temp + ptr1.mValue + ptr2.mValue ;
+            ptr1.mValue = sum % 10;
             if (sum >=10) {
                 temp = 1;
+            } else {
+                temp = 0;
             }
-            ptr1.mValue = (temp + ptr1.mValue + ptr2.mValue) % 10;
+            pre = ptr1;
+            ptr1 = ptr1.next;
+            ptr2 = ptr2.next;
         }
 
-        if (ptr1.next == null) {
-            ptr1.next = ptr2.next;
+        if (ptr1 == null) {
+            pre.next = ptr2;
         }
+        return reverseList(head1);
 
     }
-*/
+
+    private static void printList(Node head) {
+        System.out.println("---------------------------");
+        Node cur = head;
+        while (cur != null) {
+           System.out.print(cur.mValue + ",");
+           cur = cur.next;
+        }
+        System.out.println("");
+    }
 
     public static void main(String[] args) {
-        Node list1 = init(new int[]{2,4,3});
+        Node list1 = init(new int[]{2,4,3, 9, 8});
         Node list2 = init(new int[]{5,6,4});
+        System.out.println("list1 is :");
+        printList(list1);
+        System.out.println();
+        System.out.println("list2 is :");
+        printList(list2);
+
+
+        System.out.println();
+        System.out.println("combined list is:");
+        printList(combineTowList(list1, list2));
+
+
     }
 
 }
