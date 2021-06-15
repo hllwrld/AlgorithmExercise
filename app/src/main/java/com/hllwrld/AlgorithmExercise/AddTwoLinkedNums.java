@@ -50,6 +50,7 @@ public class AddTwoLinkedNums {
         return pre;
     }
 
+/*
     private static void combineTowList(Node list1, Node list2) {
         list1 = reverseList(list1);
         list2 = reverseList(list2);
@@ -69,6 +70,7 @@ public class AddTwoLinkedNums {
         }
 
     }
+*/
 
     public static void main(String[] args) {
         Node list1 = init(new int[]{2,4,3});
