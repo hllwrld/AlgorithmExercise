@@ -4,9 +4,10 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-val unit1 = listOf("I", "V", "x")
+val unit1 = listOf("I", "V", "X")
 val unit10 = listOf("X", "L", "C")
 val unit100 = listOf("C", "D", "M")
+val unit1000 = listOf("M", "", "")
 
 
 
@@ -27,7 +28,6 @@ fun luoMaNum(_num: Int): Flow<Int> = flow{
     check(_num in 1..3999)
 
     var num = _num
-    println(num.toString().reversed())
 
 
     num.toString().reversed().forEach{
@@ -38,12 +38,17 @@ fun luoMaNum(_num: Int): Flow<Int> = flow{
 
 fun main() = runBlocking <Unit>{
 
-    val flow = luoMaNum(1994)
-    flow.map {
-        rules(it, )
-    }.reduce()
+    val flow = luoMaNum(9)
 
-    flow.collect {
-        print(it)
-    }
+    println(flow.withIndex().map {
+        val unit = when(it.index) {
+            0 -> unit1
+            1-> unit10
+            2-> unit100
+            3-> unit1000
+            else-> emptyList()
+        }
+        rules(it.value, unit)
+    }.reduce{ accumulator, value -> value + accumulator })
+
 }
