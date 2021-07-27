@@ -5,6 +5,7 @@ import java.util.Collections;
 public class NoDupArray {
 
 
+
     public static char[] getNoDupArray(char[] chars) {
 
         int l = 0;
